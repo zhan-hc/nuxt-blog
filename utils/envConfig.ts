@@ -1,0 +1,1 @@
+export const host = 'http://43.138.89.227:3000'

@@ -1,0 +1,64 @@
+@media screen and (max-width: 900px) {
+  /* 顶部导航栏*/
+  .nav-header {
+    height: 56px !important;
+    padding: 4px 20px !important;
+    .header-tags {
+      .tag {
+        display: none;
+      }
+      .icon-expand {
+        display: block !important;
+      }
+    }
+  }
+  /*顶部导航*/
+  .nav-fill {
+    height: 56px !important;
+  }
+  .header-expand {
+    display: block;
+  }
+  /*首页*/
+  .home-container {
+    .home-main {
+      width: calc(100vw - 40px) !important;
+      margin: 0 20px !important;
+      .article-item {
+        box-sizing: border-box;
+        .article-cover {
+          display: none;
+        }
+      }
+    }
+    .home-right {
+      display: none;
+    }
+  }
+  /*nav*/
+  .menu-bar {
+    display: none;
+  }
+  .tab-content {
+    padding: 20px !important;
+  }
+
+  /*author*/
+  .author-card {
+    display: none !important;
+  }
+
+  /*article*/ 
+  .article-container {
+    padding: 20px !important;
+    .article-minor {
+      display: none;
+    }
+    .article-wrap {
+      width: calc(100vw - 46px);
+    }
+    .article-comment {
+      width: calc(100vw - 46px) !important;
+    }
+  }
+}
