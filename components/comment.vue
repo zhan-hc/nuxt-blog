@@ -6,13 +6,13 @@
                 :width="210"
                 >
                 <template #reference>
-                    <el-avatar :src="`${host}/static/avatar/avatar${curAvatarIndex}.png`" />
+                    <el-avatar :src="`${apiHost}/static/avatar/avatar${curAvatarIndex}.png`" />
                 </template>
                 <template #default>
                     <div style="display: flex;flex-wrap: wrap;">
                         <img 
                             v-for="item in 16" :key="item" 
-                            :src="`${host}/static/avatar/avatar${item}.png`" 
+                            :src="`${apiHost}/static/avatar/avatar${item}.png`" 
                             width="36" height="36" 
                             style="margin: 0 10px 5px 0; cursor: pointer;"
                             @click="curAvatarIndex = item"
@@ -67,7 +67,7 @@
 
 <script lang='ts' setup>
 import { CommentType } from '@/constants/types'
-import { host } from '@/utils/envConfig'
+import { apiHost } from '@/utils/envConfig'
 import { ref } from 'vue'
 
 const emit = defineEmits(['submit'])
@@ -82,7 +82,7 @@ const content = ref('')
 
 const onSubmit = () => {
     emit('submit', {
-        avatar: `${host}/static/avatar/avatar${curAvatarIndex.value}.png`,
+        avatar: `${apiHost}/static/avatar/avatar${curAvatarIndex.value}.png`,
         content: content.value
     })
 }

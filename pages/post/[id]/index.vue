@@ -27,6 +27,10 @@
   import useCollect from '@/hook/common/useCollect'
   import { formatDate } from '@/utils/common'
 
+const route = useRoute()
+
+const id = route.params.id
+
   const content = useState('content', () => null)
   const article = useState('article', () => null)
   const commentList = useState('comment', () => [])
@@ -40,7 +44,7 @@
       avatar,
       content,
       nickname,
-      article_id: articleId,
+      article_id: id,
       create_time: +new Date(),
       isAuthor: 0
     }
@@ -49,16 +53,16 @@
   }
 
   const getCommentList = async () => {
-    const { data:res1 } = await axios.get(`http://43.138.89.227:3000/comment/getCommentList?id=1`)
+    const { data:res1 } = await axios.get(`http://43.138.89.227:3000/comment/getCommentList?id=${id}`)
     commentList.value = res1.data.commentList
   }
 
-  onMounted(() => {
+  onMounted(async () => {
     getArticleMenu(content.value)
   })
 
   onServerPrefetch(async () => {
-    const { data:res } = await axios.get(`http://43.138.89.227:3000/article/getArticleDetail?id=1`)
+    const { data:res } = await axios.get(`http://43.138.89.227:3000/article/getArticleDetail?id=${id}`)
     content.value = res.data.content
     article.value = res.data.article
     await getCommentList()

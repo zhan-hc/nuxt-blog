@@ -1,27 +1,27 @@
 <template>
   <div>
     <div class="nav-header">
-    <div class="header-left">
+    <NuxtLink :to="`${pageHost}`" class="header-left">
       <img class="logo" src="../assets/image/logo.png" alt=""/>
       <span class="author">前端笨鸟</span>
-    </div>
+    </NuxtLink>
     <div class="header-tags">
-      <router-link to="/" class="tag">Home</router-link>
-      <router-link to="/nav" class="tag">Nav</router-link>
+      <NuxtLink  :to="`${pageHost}`" class="tag">Home</NuxtLink >
+      <NuxtLink  :to="`${pageHost}/nav`" class="tag">Nav</NuxtLink >
       <i class="iconfont icon-expand" @click="expandStatus = true"></i>
     </div>
   </div>
   <div class="nav-fill"></div>
   <Transition name="slide-fade">
     <div v-show="expandStatus" ref="header" class="header-expand">
-      <router-link to="/" class="tag" @click.stop="toggleExpand">
+      <NuxtLink  :to="`${pageHost}`" class="tag" @click.stop="toggleExpand">
         <i class="iconfont icon-home"></i>
         <span>Home</span>
-      </router-link>
-      <router-link to="/nav" class="tag" @click.stop="toggleExpand">
+      </NuxtLink >
+      <NuxtLink  :to="`${pageHost}/nav`" class="tag" @click.stop="toggleExpand">
         <i class="iconfont icon-menu"></i>
         <span>Nav</span>
-      </router-link>
+      </NuxtLink >
     </div>
   </Transition>
   </div>
@@ -31,6 +31,7 @@
 <script lang='ts' setup>
   import { Ref, ref } from "vue"
   import { onClickOutside } from '@vueuse/core'
+  import { pageHost } from '@/utils/envConfig'
   const expandStatus = ref(false)
   const header:Ref<HTMLElement|null> = ref(null)
   const toggleExpand = () => {
@@ -78,7 +79,7 @@
         color: rgba(0, 0, 0, 0.6);
         margin-right: 20px;
         text-decoration: none;
-        &.router-link-exact-active {
+        &.NuxtLink -exact-active {
           color: rgba(0, 0, 0, 0.9);
         }
         &:hover {
@@ -117,7 +118,7 @@
       padding: 10px 10px;
       font-weight: bold;
       color: rgba(0, 0, 0, 0.5);
-      &.router-link-exact-active {
+      &.NuxtLink -exact-active {
         color: rgba(0, 0, 0, 0.9);
         .iconfont {
           color: rgba(0, 0, 0, 0.9);
