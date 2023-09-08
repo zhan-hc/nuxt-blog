@@ -16,5 +16,17 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@element-plus/nuxt'
-  ]
+  ],
+  app: {
+      head: {
+        title: "前端笨鸟",
+        meta: [
+          { name: "description", content: "前端快捷导航和前端知识分享讨论" },
+          { name: "keyword", content: "前端笨鸟" }
+        ],
+        link: [
+          { rel: "icon", type: "image/png", href: "logo.png" }
+        ]
+      }
+  }
 })
