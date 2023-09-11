@@ -2,7 +2,7 @@
   <div>
     <div class="nav-header">
     <NuxtLink :to="`${pageHost}`" class="header-left">
-      <img class="logo" src="../assets/image/logo.png" alt=""/>
+      <img class="logo" src="http://43.138.89.227/logo.svg" alt=""/>
       <span class="author">前端笨鸟</span>
     </NuxtLink>
     <div class="header-tags">

@@ -25,7 +25,7 @@ export default defineNuxtConfig({
           { name: "keyword", content: "前端笨鸟" }
         ],
         link: [
-          { rel: "icon", type: "image/png", href: "logo.png" }
+          { rel: "icon", type: "image/svg+xml", href: "../logo.svg" }
         ]
       }
   }

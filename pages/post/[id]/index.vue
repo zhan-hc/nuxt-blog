@@ -65,6 +65,7 @@ const id = route.params.id
     const { data:res } = await axios.get(`http://43.138.89.227:3000/article/getArticleDetail?id=${id}`)
     content.value = res.data.content
     article.value = res.data.article
+    getArticleMenu(content.value)
     await getCommentList()
   })
 </script>
