@@ -122,12 +122,12 @@ const id = route.params.id
         margin-bottom: 10px;
         font-size: 14px;
         &.active {
-          color: #1E90FF !important;
+          color: #FE6865 !important;
           font-weight: bold;
         }
         &:hover {
           cursor: pointer;
-          color: #49b1f5 !important;
+          color: #fa8072 !important;
         }
         &:last-child {
           margin-bottom: 0;

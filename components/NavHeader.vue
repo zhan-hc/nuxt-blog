@@ -63,7 +63,7 @@
       .author {
         font-size: 20px;
         font-weight: bold;
-        color: #6495ED;
+        color: #fa8072;
         letter-spacing: 3px;
       }
       .logo {
@@ -79,12 +79,9 @@
         color: rgba(0, 0, 0, 0.6);
         margin-right: 20px;
         text-decoration: none;
-        &.NuxtLink -exact-active {
-          color: rgba(0, 0, 0, 0.9);
-        }
         &:hover {
           cursor: pointer;
-          color: rgba(0, 0, 0, 0.7);
+          color: #f08080;
         }
         &:last-of-type {
           margin-right: 0;
@@ -118,15 +115,9 @@
       padding: 10px 10px;
       font-weight: bold;
       color: rgba(0, 0, 0, 0.5);
-      &.NuxtLink -exact-active {
-        color: rgba(0, 0, 0, 0.9);
-        .iconfont {
-          color: rgba(0, 0, 0, 0.9);
-        }
-      }
       &:hover {
         cursor: pointer;
-        color: rgba(0, 0, 0, 0.7);
+        color: #f08080;
       }
     }
   }
