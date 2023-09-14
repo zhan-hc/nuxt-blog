@@ -81,10 +81,11 @@ const curAvatarIndex = ref(1)
 const content = ref('')
 
 const onSubmit = () => {
-    emit('submit', {
+    content.value.trim() && emit('submit', {
         avatar: `${apiHost}/static/avatar/avatar${curAvatarIndex.value}.png`,
         content: content.value
-    })
+    }) 
+    content.value = ''
 }
 </script>
 
