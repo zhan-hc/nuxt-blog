@@ -1,5 +1,11 @@
 <template>
     <div class="article-container" @scroll="handleScroll($event, setActiveMenu)">
+    <div class="operate-card">
+      <div class="like" :class="{'active' : likeStatus }" @click="changeLikeStatus">
+        <i class="iconfont icon-upvote"></i>
+        <div class="like-num" v-show="likeNum !== 0">{{ likeNum }}</div>
+      </div>
+    </div>
     <div class="article-wrap">
       <div class="article-main card">
         <div class="article-title">{{article?.article_title}}</div>
@@ -29,12 +35,15 @@
 
 const route = useRoute()
 
-const id = route.params.id
+  const id = route.params.id
 
   const content = useState('content', () => null)
   const article = useState('article', () => null)
+  const likeStatus = useState('likeStatus', () => 0)
+  const likeNum = useState('likeNum', () => 0)
   const commentList = useState('comment', () => [])
   const { getUserId } = useCollect()
+  const userId = useState('userId', () => '')
   const { menu, activeMenuIndex, setMenuStyle, getArticleMenu, setActiveMenu, addIndexToHtml } = useArticleMenu()
   const { handleScroll } = useScrollAnchor('h', 'article-menu_')
 
@@ -57,8 +66,27 @@ const id = route.params.id
     commentList.value = res1.data.commentList
   }
 
+  const initLikeData = async () => {
+    userId.value = await getUserId()
+    const userRes = await axios.get(`http://43.138.89.227:3000/like/getLikeToUserId?article_id=${id}&user_id=${userId.value}`)
+    const articleRes = await axios.get(`http://43.138.89.227:3000/like/getLikeToId?id=${id}`)
+    likeStatus.value = userRes.data.data.status
+    likeNum.value = articleRes.data.data.total
+  }
+
+  const changeLikeStatus =  async () => {
+    await axios.post('http://43.138.89.227:3000/like/changeLikestatus', {
+      article_id: id,
+      user_id: userId.value,
+      status: !likeStatus.value
+    })
+    // likeStatus.value = !likeStatus.value
+    await initLikeData()
+  }
+
   onMounted(async () => {
     getArticleMenu(content.value)
+    await initLikeData()
   })
 
   onServerPrefetch(async () => {
@@ -79,6 +107,41 @@ const id = route.params.id
     padding: 20px 200px;
     box-sizing: border-box;
     overflow-y: scroll;
+    .operate-card {
+      margin-top: 200px;
+      display: flex;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 120px;
+      .like {
+        position: relative;
+        padding: 10px;
+        background: #fff;
+        color: #989EBE;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px 0 rgba(50,50,50,.2);
+        &-num {
+          position: absolute;
+          top: 0;
+          right: -15px;
+          background-color: #fa8072;
+          color: #fff;
+          border-radius: 10px;
+          padding: 3px 6px;
+          font-size: 14px;
+        }
+        &.active {
+          color: #fa8072;
+        }
+        &:hover {
+          cursor: pointer;
+          color: #808080;
+        }
+        .icon-upvote {
+          font-size: 28px;
+        }
+      }
+    }
     .article-wrap {
       display: flex;
       flex-direction: column;
@@ -86,6 +149,7 @@ const id = route.params.id
       flex-shrink: 0;
       max-width: 850px;
       transition: width 0.5s;
+      background-color: #fff;
       .article-main {
         padding: 30px;
         box-sizing: border-box;
@@ -118,6 +182,7 @@ const id = route.params.id
     .article-menu {
       margin-top: 20px;
       padding: 20px;
+      background-color: #fff;
       box-sizing: border-box;
       .menu-item {
         display: block;

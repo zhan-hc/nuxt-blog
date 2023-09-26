@@ -17,6 +17,7 @@
 
 <style scoped lang='scss'>
 .author-card {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
