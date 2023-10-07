@@ -24,6 +24,16 @@
         <a class="menu-item" v-for="(item, i) in menu" :key="i" :href="`#article-menu_${i + 1}`" :class="{active: i === activeMenuIndex}" :style="setMenuStyle(item)">{{ item.content }}</a>
       </div>
     </div>
+    <div class="article-operate">
+      <div class="item"  :class="{'active' : likeStatus }"  @click="changeLikeStatus">
+        <i class="iconfont icon-upvote"></i>
+        <span v-show="likeNum !== 0">{{ likeNum }}</span>
+      </div>
+      <div class="item" @click="scrollComment">
+        <i class="iconfont icon-comment"></i>
+        <span>{{ commentList.length }}</span>
+      </div>
+    </div>
   </div>
   </template>
 <script setup>
@@ -59,6 +69,11 @@ const route = useRoute()
     }
     await axios.post('http://43.138.89.227:3000/comment/addComment', params)
     await getCommentList()
+  }
+  
+  const scrollComment = () => {
+    const comment = document.querySelector('.article-comment')
+    comment?.scrollIntoView()
   }
 
   const getCommentList = async () => {
@@ -199,6 +214,49 @@ const route = useRoute()
         &:last-child {
           margin-bottom: 0;
         }
+      }
+    }
+    .article-operate {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding-bottom: calc(constant(safe-area-inset-bottom)); /* 兼容 iOS < 11.2 */
+      padding-bottom: calc(env(safe-area-inset-bottom)); /* 兼容 iOS >= 11.2 */
+      display: none;
+      background: #fff;
+      height: 54px;
+      border-top: 1px solid #e4e6eb;
+      box-sizing: border-box;
+      align-items: center;
+      font-size: 14px;
+      &:hover {
+        cursor: pointer;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        &.active {
+          .iconfont {
+            color: #fa8072;
+          }
+        }
+        .iconfont {
+          margin-right: 15px;
+          font-size: 20px;
+          color: #515767;
+        }
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 60%;
+        width: 1px;
+        background-color: #ccc;
       }
     }
   }
