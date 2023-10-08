@@ -5,6 +5,10 @@
         <i class="iconfont icon-upvote"></i>
         <div class="like-num" v-show="likeNum !== 0">{{ likeNum }}</div>
       </div>
+      <div class="comment" @click="scrollComment">
+        <i class="iconfont icon-comment"></i>
+        <div class="comment-num" v-show="commentList.length !== 0">{{ commentList.length }}</div>
+      </div>
     </div>
     <div class="article-wrap">
       <div class="article-main card">
@@ -125,16 +129,24 @@ const route = useRoute()
     .operate-card {
       margin-top: 200px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       flex-shrink: 0;
       width: 120px;
-      .like {
+      .like, .comment {
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
         padding: 10px;
         background: #fff;
         color: #989EBE;
         border-radius: 50%;
         box-shadow: 0 2px 4px 0 rgba(50,50,50,.2);
+        box-sizing: border-box;
         &-num {
           position: absolute;
           top: 0;
@@ -155,6 +167,12 @@ const route = useRoute()
         .icon-upvote {
           font-size: 28px;
         }
+        .icon-comment {
+          font-size: 28px;
+        }
+      }
+      .comment {
+        margin-top: 20px;
       }
     }
     .article-wrap {
