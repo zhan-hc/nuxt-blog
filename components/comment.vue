@@ -98,7 +98,7 @@ const onSubmit = () => {
     padding: 20px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #fff;
+    @include bg_color();
     .content-wrap {
         display: flex;
     }

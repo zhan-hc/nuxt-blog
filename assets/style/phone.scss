@@ -3,6 +3,14 @@
   .nav-header {
     height: 56px !important;
     padding: 4px 20px !important;
+    .header-left {
+      .author {
+        display: none;
+      }
+    }
+    .theme {
+      margin-right: 0 !important;
+    }
     .header-tags {
       .tag {
         display: none;

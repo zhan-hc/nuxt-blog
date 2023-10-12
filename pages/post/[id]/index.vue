@@ -46,6 +46,8 @@
   import useScrollAnchor from '@/hook/common/useScrollAnchor'
   import useCollect from '@/hook/common/useCollect'
   import { formatDate } from '@/utils/common'
+  import { apiHost } from '@/utils/envConfig'
+  
 
 const route = useRoute()
 
@@ -71,7 +73,7 @@ const route = useRoute()
       create_time: +new Date(),
       isAuthor: 0
     }
-    await axios.post('http://43.138.89.227:3000/comment/addComment', params)
+    await axios.post(`${apiHost}/comment/addComment`, params)
     await getCommentList()
   }
   
@@ -81,20 +83,20 @@ const route = useRoute()
   }
 
   const getCommentList = async () => {
-    const { data:res1 } = await axios.get(`http://43.138.89.227:3000/comment/getCommentList?id=${id}`)
+    const { data:res1 } = await axios.get(`${apiHost}/comment/getCommentList?id=${id}`)
     commentList.value = res1.data.commentList
   }
 
   const initLikeData = async () => {
     userId.value = await getUserId()
-    const userRes = await axios.get(`http://43.138.89.227:3000/like/getLikeToUserId?article_id=${id}&user_id=${userId.value}`)
-    const articleRes = await axios.get(`http://43.138.89.227:3000/like/getLikeToId?id=${id}`)
+    const userRes = await axios.get(`${apiHost}/like/getLikeToUserId?article_id=${id}&user_id=${userId.value}`)
+    const articleRes = await axios.get(`${apiHost}/like/getLikeToId?id=${id}`)
     likeStatus.value = userRes.data.data.status
     likeNum.value = articleRes.data.data.total
   }
 
   const changeLikeStatus =  async () => {
-    await axios.post('http://43.138.89.227:3000/like/changeLikestatus', {
+    await axios.post(`${apiHost}/like/changeLikestatus`, {
       article_id: id,
       user_id: userId.value,
       status: !likeStatus.value
@@ -105,11 +107,11 @@ const route = useRoute()
 
   onMounted(async () => {
     getArticleMenu(content.value)
-    await initLikeData()
+    // await initLikeData()
   })
 
   onServerPrefetch(async () => {
-    const { data:res } = await axios.get(`http://43.138.89.227:3000/article/getArticleDetail?id=${id}`)
+    const { data:res } = await axios.get(`${apiHost}/article/getArticleDetail?id=${id}`)
     content.value = res.data.content
     article.value = res.data.article
     getArticleMenu(content.value)
@@ -182,12 +184,13 @@ const route = useRoute()
       flex-shrink: 0;
       max-width: 850px;
       transition: width 0.5s;
-      background-color: #fff;
+      @include bg_color();
       .article-main {
         padding: 30px;
         box-sizing: border-box;
       }
       .article-title {
+        @include font_color(1);
         font-weight: bold;
         letter-spacing: 2px;
         font-size: 28px;
@@ -242,9 +245,11 @@ const route = useRoute()
       padding-bottom: calc(constant(safe-area-inset-bottom)); /* 兼容 iOS < 11.2 */
       padding-bottom: calc(env(safe-area-inset-bottom)); /* 兼容 iOS >= 11.2 */
       display: none;
-      background: #fff;
+      @include bg_color();
+      @include font_color(1);
       height: 54px;
       border-top: 1px solid #e4e6eb;
+      @include border_color(1);
       box-sizing: border-box;
       align-items: center;
       font-size: 14px;

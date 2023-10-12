@@ -5,7 +5,15 @@
   max-width: 850px;
   transition: width 0.5s;
   padding: 10px;
+  @include bg_color();
+  @include font_color(1);
 }
+
+pre,table, td, tr {
+  @include bg_color();
+}
+
+
 
 @media screen and (max-width: 767px) {
   .markdown-body {
