@@ -107,7 +107,7 @@ const route = useRoute()
 
   onMounted(async () => {
     getArticleMenu(content.value)
-    // await initLikeData()
+    await initLikeData()
   })
 
   onServerPrefetch(async () => {
