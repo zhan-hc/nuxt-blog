@@ -144,7 +144,7 @@ const route = useRoute()
         width: 50px;
         height: 50px;
         padding: 10px;
-        background: #fff;
+        @include bg_color();
         color: #989EBE;
         border-radius: 50%;
         box-shadow: 0 2px 4px 0 rgba(50,50,50,.2);
@@ -218,19 +218,18 @@ const route = useRoute()
     .article-menu {
       margin-top: 20px;
       padding: 20px;
-      background-color: #fff;
       box-sizing: border-box;
       .menu-item {
         display: block;
         margin-bottom: 10px;
         font-size: 14px;
         &.active {
-          color: #FE6865 !important;
+          color: $primary-color-active !important;
           font-weight: bold;
         }
         &:hover {
           cursor: pointer;
-          color: #fa8072 !important;
+          color: $primary-color !important;
         }
         &:last-child {
           margin-bottom: 0;

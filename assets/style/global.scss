@@ -18,9 +18,15 @@
 	-webkit-box-orient: vertical;	//盒子中内容竖直排列
 }
 
+/*图标*/
+.iconfont {
+  @include icon_color();
+}
+
 .card {
   box-shadow: 0 4px 8px 6px rgba(7,17,27,0.06);
   border-radius: 6px;
+  @include bg_color();
   &:hover {
     box-shadow: 0 4px 12px 12px rgba(7,17,27,0.1);
   }
@@ -75,5 +81,5 @@ a:active {
 }
 
 ::-webkit-scrollbar-track {
-  @include bg_color()
+  background-color: $theme-color;
 }

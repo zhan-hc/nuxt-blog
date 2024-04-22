@@ -17,13 +17,13 @@
 
 <style scoped lang='scss'>
 .author-card {
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 200px;
   padding: 20px;
   box-sizing: border-box;
+  @include font_color(0);
   .author-avatar {
     width: 100px;
     height: 100px;
@@ -46,7 +46,7 @@
     margin-top: 15px;
     .iconfont {
       font-size: 24px;
-      color: #696969;
+      color: $blog-color-gray-1;
       &.icon-juejin {
         color: #1e80ff;
       }
