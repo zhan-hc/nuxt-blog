@@ -14,6 +14,7 @@
     <div class="header-tags">
       <NuxtLink  :to="`${pageHost}`" class="tag">Home</NuxtLink >
       <NuxtLink  :to="`${pageHost}/nav`" class="tag">Nav</NuxtLink >
+      <NuxtLink  :to="`${pageHost}/project`" class="tag">Project</NuxtLink >
       <!-- <i class="iconfont icon-expand" @click="expandStatus = true"></i> -->
     </div>
   </div>
