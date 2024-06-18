@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://43.138.89.227:3000',
+        target: 'http://www.janus-c.top/blog',
         changeOrigin: true
       }
     }

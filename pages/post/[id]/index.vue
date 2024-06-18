@@ -7,7 +7,7 @@
       </div>
       <div class="comment" @click="scrollComment">
         <i class="iconfont icon-comment"></i>
-        <div class="comment-num" v-show="commentList.length !== 0">{{ commentList.length }}</div>
+        <div class="comment-num" v-show="commentTotal !== 0">{{ commentTotal }}</div>
       </div>
     </div>
     <div class="article-wrap">
@@ -35,7 +35,7 @@
       </div>
       <div class="item" @click="scrollComment">
         <i class="iconfont icon-comment"></i>
-        <span>{{ commentList.length }}</span>
+        <span>{{ commentTotal }}</span>
       </div>
     </div>
   </div>
@@ -58,12 +58,13 @@ const route = useRoute()
   const likeStatus = useState('likeStatus', () => 0)
   const likeNum = useState('likeNum', () => 0)
   const commentList = useState('comment', () => [])
+  const commentTotal = useState('commentTotal', () => 0)
   const { getUserId } = useCollect()
   const userId = useState('userId', () => '')
   const { menu, activeMenuIndex, setMenuStyle, getArticleMenu, setActiveMenu, addIndexToHtml } = useArticleMenu()
   const { handleScroll } = useScrollAnchor('h', 'article-menu_')
 
-  const submitComment = async ({ avatar, content }) => {
+  const submitComment = async ({ avatar, content, parent_id }) => {
     const nickname = await getUserId()
     const params = {
       avatar,
@@ -71,7 +72,8 @@ const route = useRoute()
       nickname,
       article_id: id,
       create_time: +new Date(),
-      isAuthor: 0
+      isAuthor: 0,
+      parent_id
     }
     await axios.post(`${apiHost}/comment/addComment`, params)
     await getCommentList()
@@ -83,8 +85,9 @@ const route = useRoute()
   }
 
   const getCommentList = async () => {
-    const { data:res1 } = await axios.get(`${apiHost}/comment/getCommentList?id=${id}`)
-    commentList.value = res1.data.commentList
+    const { data:{ data: { list, total } } } = await axios.get(`${apiHost}/comment/getCommentList?id=${id}`)
+    commentList.value = list
+    commentTotal.value = total
   }
 
   const initLikeData = async () => {
@@ -153,14 +156,14 @@ const route = useRoute()
           position: absolute;
           top: 0;
           right: -15px;
-          background-color: #fa8072;
+          background-color: $primary-color;
           color: #fff;
           border-radius: 10px;
           padding: 3px 6px;
           font-size: 14px;
         }
         &.active {
-          color: #fa8072;
+          color: $primary-color;
         }
         &:hover {
           cursor: pointer;
@@ -262,7 +265,7 @@ const route = useRoute()
         flex: 1;
         &.active {
           .iconfont {
-            color: #fa8072;
+            color: $primary-color;
           }
         }
         .iconfont {
