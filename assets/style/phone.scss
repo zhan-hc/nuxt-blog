@@ -1,0 +1,90 @@
+@media screen and (max-width: 767px) {
+  /* 顶部导航栏*/
+  .nav-header {
+    height: 56px !important;
+    padding: 4px 20px !important;
+    .header-left {
+      .author {
+        display: none;
+      }
+    }
+    .theme {
+      margin-right: 0 !important;
+    }
+    .header-tags {
+      .tag {
+        display: none;
+      }
+      .icon-expand {
+        display: block !important;
+      }
+    }
+  }
+  /*顶部导航*/
+  .nav-fill {
+    height: 56px !important;
+  }
+  .header-expand {
+    display: block;
+  }
+  /*首页*/
+  .home-container {
+    .home-main {
+      width: calc(100vw - 40px) !important;
+      margin: 0 20px !important;
+      .article-item {
+        box-sizing: border-box;
+        .article-cover {
+          display: none;
+        }
+      }
+    }
+    .home-right {
+      display: none;
+    }
+  }
+  /*nav*/
+  .menu-bar {
+    display: none;
+  }
+  .tab-content {
+    padding: 20px !important;
+  }
+
+  /*author*/
+  .author-card {
+    display: none !important;
+  }
+
+  /*article*/ 
+  .article-container {
+    padding: 20px !important;
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 54px) !important; /* 兼容 iOS < 11.2 */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 54px) !important; /* 兼容 iOS >= 11.2 */
+    .article-minor {
+      display: none;
+    }
+    .article-wrap {
+      width: calc(100vw - 46px);
+    }
+    .article-comment {
+      width: calc(100vw - 46px) !important;
+    }
+  }
+  .article-operate {
+    display: flex !important;
+  }
+}
+@media screen and (max-width: 959px) {
+  .article-container {
+    .author-card {
+      display: none !important;
+    }
+    .article-minor {
+      display: none;
+    }
+    .operate-card {
+      display: none !important;
+    }
+  }
+}
