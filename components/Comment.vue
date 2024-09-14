@@ -73,7 +73,7 @@
                 <div class="item-content">
                     <svg width="17" height="10" class="radius">
                         <path
-                        :fill="childComment.isAuthor ? '#3CB371' : '#fa8072'" 
+                        :fill="childComment.isAuthor ? '#3CB371' : '#375f9a'" 
                         d="
                             M 0 10 
                             A 10,10,0,0,0,8 7 
@@ -95,6 +95,7 @@
 </template>
 
 <script lang='ts' setup>
+import { defineEmits, defineProps  } from 'vue'
 import { imgHost } from '@/utils/envConfig'
 
 const emit = defineEmits(['submit'])

@@ -8,7 +8,7 @@
         </div>
         <div class="comment" @click="scrollComment">
           <i class="iconfont icon-comment"></i>
-          <div class="comment-num" v-show="commentList.length !== 0">{{ commentList.length }}</div>
+          <div class="comment-num" v-show="commentTotal !== 0">{{ commentTotal }}</div>
         </div>
       </div>
       <div class="article-main card">
@@ -35,7 +35,7 @@
       </div>
       <div class="item" @click="scrollComment">
         <i class="iconfont icon-comment"></i>
-        <span>{{ commentList.length }}</span>
+        <span>{{ commentTotal }}</span>
       </div>
     </div>
   </div>
@@ -62,6 +62,7 @@ const article = reactive({
 })
 const anchorLinks = useState('article', () => [])
 const commentList = useState('comment', () => [])
+const commentTotal = useState('commentTotal', () => 0)
 const userId = useState('user', () => [])
 
 const handleLike = async () => {
@@ -113,6 +114,7 @@ async function getArticleData () {
 async function getCommentData () {
   const data = await getCommentList(id)
   commentList.value = data.list
+  commentTotal.value = data.total
 }
 
 async function getLikeData () {
